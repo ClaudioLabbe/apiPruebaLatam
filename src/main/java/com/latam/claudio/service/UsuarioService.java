@@ -1,6 +1,5 @@
 package com.latam.claudio.service;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -20,13 +19,12 @@ public class UsuarioService {
 	
 	public Usuario add(Usuario usuario) {
 		
-		Poema poema = poemaService.obtienePoema();
-		
 		usuario.setEdad(calcularEdad(usuario.getFechaDeNacimiento()));
 		
 		LocalDate fechaNac = usuario.getFechaDeNacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		
 		if(cumpleaños(fechaNac) == true) {
+			Poema poema = poemaService.obtienePoema();
 			usuario.setCumpleaños("Feliz cumpleaños!!!");
 			usuario.setPoema(poema.getContent());
 		}
